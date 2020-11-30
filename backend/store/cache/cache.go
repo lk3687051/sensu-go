@@ -231,7 +231,8 @@ func (r *Resource) notifyWatchers() {
 func (r *Resource) start(ctx context.Context) {
 	// 1s is the minimum scheduling interval, and so is the rate that
 	// the cache will update at.
-	ticker := time.NewTicker(time.Second * 5)
+	// 我们的周期默认300s 所以只需要设置 300s 一次
+	ticker := time.NewTicker(time.Second * 300)
 	defer ticker.Stop()
 	for {
 		select {

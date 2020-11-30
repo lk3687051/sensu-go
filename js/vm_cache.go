@@ -97,5 +97,5 @@ func (c *vmCache) Dispose(key string) {
 // Init initializes the value in the cache.
 func (c *vmCache) Init(key string, vm *otto.Otto) {
 	val := &cacheValue{lastRead: time.Now().Unix(), vm: vm}
-	c.vms.Store(key, val)
+	_, _ = c.vms.LoadOrStore(key, val)
 }
