@@ -88,6 +88,7 @@ type Config struct {
 	BufferSize      int
 	WorkerCount     int
 	StoreTimeout    time.Duration
+	EventLogPath       string
 }
 
 // New creates a new Eventd.
@@ -116,7 +117,7 @@ func New(ctx context.Context, c Config, opts ...Option) (*Eventd, error) {
 		eventChan:       make(chan interface{}, c.BufferSize),
 		wg:              &sync.WaitGroup{},
 		mu:              &sync.Mutex{},
-		Logger:          &RawLogger{},
+		Logger:          &RawLogger{path:c.EventLogPath},
 		storeTimeout:    c.StoreTimeout,
 	}
 

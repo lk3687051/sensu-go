@@ -15,7 +15,8 @@ const (
 
 	// DefaultEtcdPeerURL is the default URL to listen for Etcd peers (single-node cluster only)
 	DefaultEtcdPeerURL = "http://127.0.0.1:2380"
-
+	// Add by luke for event log
+	DefaultSensuBackendEventLogFile = "/var/log/event.log"
 	// FlagEventdWorkers defines the number of workers for eventd
 	FlagEventdWorkers = "eventd-workers"
 	// FlagEventdBufferSize defines the buffer size for eventd
@@ -39,6 +40,7 @@ const (
 	// FlagJWTPublicKeyFile defines the path to the public key file for JWT
 	// signatures validation
 	FlagJWTPublicKeyFile = "jwt-public-key-file"
+	FlagSensuBackendEventLogFile = "sensu-backend-event-log-file"
 )
 
 // Config specifies a Backend configuration.
@@ -77,7 +79,8 @@ type Config struct {
 
 	// Annotations are key-value pairs that users can provide to backend entities
 	Annotations map[string]string
-
+	// Add by luke for event log
+	SensuBackendEventLogFile string
 	// Etcd configuration
 	EtcdAdvertiseClientURLs      []string
 	EtcdInitialAdvertisePeerURLs []string

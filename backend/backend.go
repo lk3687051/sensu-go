@@ -272,6 +272,7 @@ func Initialize(ctx context.Context, config *Config) (*Backend, error) {
 			BufferSize:      viper.GetInt(FlagEventdBufferSize),
 			WorkerCount:     viper.GetInt(FlagEventdWorkers),
 			StoreTimeout:    2 * time.Minute,
+			EventLogPath:    viper.GetString(FlagSensuBackendEventLogFile),
 		},
 	)
 	if err != nil {

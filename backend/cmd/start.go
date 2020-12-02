@@ -330,6 +330,7 @@ func handleConfig(cmd *cobra.Command, server bool) error {
 		viper.SetDefault(backend.FlagPipelinedWorkers, 100)
 		viper.SetDefault(backend.FlagPipelinedBufferSize, 100)
 		viper.SetDefault(backend.FlagAgentWriteTimeout, 15)
+		viper.SetDefault(backend.FlagSensuBackendEventLogFile, "/var/log/event.log")
 	}
 
 	// Etcd defaults
@@ -387,7 +388,8 @@ func handleConfig(cmd *cobra.Command, server bool) error {
 		cmd.Flags().String(backend.FlagJWTPublicKeyFile, viper.GetString(backend.FlagJWTPublicKeyFile), "path to the PEM-encoded public key to use to verify JWT signatures")
 		cmd.Flags().StringToStringVar(&labels, flagLabels, nil, "entity labels map")
 		cmd.Flags().StringToStringVar(&annotations, flagAnnotations, nil, "entity annotations map")
-
+		// Event Log flags
+		cmd.Flags().String(backend.FlagSensuBackendEventLogFile, viper.GetString(backend.FlagSensuBackendEventLogFile), "path to event logging")
 		// Etcd server flags
 		cmd.Flags().StringSlice(flagEtcdPeerURLs, viper.GetStringSlice(flagEtcdPeerURLs), "list of URLs to listen on for peer traffic")
 		_ = cmd.Flags().SetAnnotation(flagEtcdPeerURLs, "categories", []string{"store"})
